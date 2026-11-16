@@ -106,9 +106,11 @@ const routeLayer=L.layerGroup().addTo(map),markLayer=L.layerGroup().addTo(map);
 let gReady=false,cur=0;
 const hasKey=GOOGLE_API_KEY&&!/PASTE/.test(GOOGLE_API_KEY);
 
-function fallbackBase(){
- const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'});
- osm.addTo(map);
+let baseFallen=false;
+function fallbackBase(note){
+ if(baseFallen)return;baseFallen=true;
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+ if(note)$('keynote').textContent=note;
  $('keynote').hidden=false;}
 
 function loadGoogle(){return new Promise((res,rej)=>{
@@ -437,15 +439,23 @@ try{const v=+localStorage.getItem('hi-slide');if(v>0&&v<SL.length)cur=v;}catch(e
 if(TODAY>=0&&SL[cur].di!==TODAY)cur=SL.findIndex(x=>x.di===TODAY&&x.i<0);
 
 /* ---------- start ---------- */
+let gLayer=null;
+/* Google calls this when it refuses the key (e.g. this site's address is not on the key's allowed list):
+   drop the blank Google layer and show OpenStreetMap instead of an empty blue map */
+window.gm_authFailure=()=>{
+ console.warn('Google Maps refused the API key for',location.href,'- falling back to OpenStreetMap');
+ gReady=false;if(gLayer){map.removeLayer(gLayer);gLayer=null;}
+ fallbackBase('Google key not allowed on this site: showing OpenStreetMap');};
 (async()=>{
  if(hasKey){try{await loadGoogle();gReady=true;
    /* a calmer basemap: no shop, restaurant or transit pins competing with the route */
-   L.gridLayer.googleMutant({type:'roadmap',styles:[
+   gLayer=L.gridLayer.googleMutant({type:'roadmap',styles:[
     {featureType:'poi.business',stylers:[{visibility:'off'}]},
     {featureType:'poi.medical',stylers:[{visibility:'off'}]},
     {featureType:'poi.school',stylers:[{visibility:'off'}]},
     {featureType:'poi.place_of_worship',stylers:[{visibility:'off'}]},
     {featureType:'transit',stylers:[{visibility:'off'}]}]}).addTo(map);
+   if(baseFallen){map.removeLayer(gLayer);gLayer=null;gReady=false;} /* the key was already refused */
   }catch(e){console.warn('Google Maps failed to load',e);fallbackBase();}}
  else fallbackBase();
  render();
