@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hawaiʻi Trip Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Hawaiʻi · Nov 23–30</h1>
+  <div id="days" aria-label="Trip days"></div>
+</header>
+<main>
+  <div id="map" aria-label="Trip map">
+    <div id="keynote" class="keynote" hidden>Add a Google API key in app.js for Google basemaps, photos and driving routes.</div>
+  </div>
+  <aside>
+    <div class="card" id="card" aria-live="polite"></div>
+    <nav>
+      <button id="prev" aria-label="Previous">&#8592;</button>
+      <div id="count"></div>
+      <button id="next" aria-label="Next">&#8594;</button>
+    </nav>
+  </aside>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.16.0/dist/Leaflet.GoogleMutant.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
