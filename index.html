@@ -2,31 +2,63 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hawaiʻi Trip Map</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hawaiʻi Trip Map: Oʻahu and Maui, Nov 23–30</title>
+<meta name="description" content="Day-by-day plan for a week on Oʻahu and Maui, with drive times, leave-by times and every stop on the map.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23d0106f'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400..700&family=Chivo+Mono:wght@400..500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>Hawaiʻi · Nov 23–30</h1>
-  <div id="days" aria-label="Trip days"></div>
-</header>
-<main>
-  <div id="map" aria-label="Trip map">
-    <div id="keynote" class="keynote" hidden>Add a Google API key in app.js for Google basemaps, photos and driving routes.</div>
+<a class="skip-link" href="#card">Skip to the plan</a>
+<header class="top">
+  <div class="brand">
+    <h1>Hawaiʻi</h1>
+    <span class="brand-sub">Nov 23–30 · <span id="countdown"></span></span>
   </div>
-  <aside>
-    <div class="card" id="card" aria-live="polite"></div>
-    <nav>
-      <button id="prev" aria-label="Previous">&#8592;</button>
-      <div id="count"></div>
-      <button id="next" aria-label="Next">&#8594;</button>
+  <div id="days" class="days" role="group" aria-label="Trip days"></div>
+  <button id="weekBtn" class="btn btn--secondary weekbtn" aria-pressed="false" aria-controls="weekview">
+    <svg class="ic-week" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+    <svg class="ic-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14M15 6v14"/></svg>
+    <span>Week</span>
+  </button>
+</header>
+<main class="app">
+  <div class="stage">
+    <div id="map" aria-label="Trip map">
+      <div id="keynote" class="keynote" hidden>Add a Google API key in app.js for Google maps, photos and driving routes.</div>
+    </div>
+    <section id="weekview" class="weekview" aria-label="Week at a glance" hidden>
+      <div class="wk" id="wkgrid"></div>
+    </section>
+  </div>
+  <section class="panel" aria-label="Plan">
+    <div class="card" id="card" tabindex="-1" aria-live="polite"></div>
+    <nav class="stepper" aria-label="Stops">
+      <div class="steps" id="steps" aria-hidden="true"></div>
+      <button id="prev" class="btn btn--secondary btn--icon" aria-label="Previous stop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <button id="next" class="btn">
+        <span class="next-txt"><span class="next-l" id="nextLabel">Next</span><span class="next-n" id="nextName"></span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
     </nav>
-  </aside>
+  </section>
 </main>
+
+<div id="lb" class="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="lbx" class="iconbtn lb-x" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button id="lbp" class="lb-nav prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <img id="lbimg" alt="">
+  <button id="lbn" class="lb-nav next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div id="lbcap" class="lb-cap"></div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.16.0/dist/Leaflet.GoogleMutant.js"></script>
 <script src="app.js"></script>
