@@ -6,11 +6,12 @@ const GOOGLE_API_KEY = "AIzaSyCpD4IWof-Kj4VNeoBZsUKYiNoU7HX5Vo4";
 const rev=a=>a.slice().reverse();
 
 const LOC={
- hnl:[21.3245,-157.9251],bnb:[21.2810,-157.8300],lani:[21.3930,-157.7150],kai:[21.3965,-157.7405],hoom:[21.3870,-157.8090],kual:[21.5210,-157.8370],pcc:[21.6390,-157.9200],
+ hnl:[21.3245,-157.9251],bnb:[21.2870,-157.8327],lani:[21.3930,-157.7150],kai:[21.3965,-157.7405],hoom:[21.3870,-157.8090],kual:[21.5210,-157.8370],pcc:[21.6390,-157.9200],
  hana:[21.2690,-157.6940],kaim:[21.2790,-157.8000],surf:[21.2755,-157.8268],sset:[21.2738,-157.8245],dh:[21.2620,-157.8060],shops:[21.2782,-157.8285],ala:[21.2910,-157.8430],
  ogg:[20.8986,-156.4305],kaa:[20.9240,-156.6920],tday:[20.9200,-156.6930],paia:[20.9130,-156.3810],twin:[20.9120,-156.2430],kean:[20.8620,-156.1440],wai:[20.7870,-156.0020],hanat:[20.7570,-155.9900],
  maa:[20.7920,-156.5110],molo:[20.6330,-156.4960],ttown:[20.6230,-156.4450],lah:[20.8780,-156.6780],kap:[21.0010,-156.6680],olu:[20.8890,-156.6810],hook:[20.9340,-156.3570],maka:[20.8570,-156.3130],sum:[20.7100,-156.2530],kah:[20.8890,-156.4700],
- pearl:[21.3649,-157.9497],nahi:[20.8290,-156.1150]};
+ pearl:[21.3649,-157.9497],nahi:[20.8290,-156.1150],
+ halona:[21.2833,-157.6766],hkai:[21.2790,-157.7060],kih:[20.7166,-156.4444],kdin:[20.7300,-156.4520],kane:[21.4130,-157.8010],dtwn:[21.3069,-157.8583],kbeach:[20.9180,-156.6960]};
 const BK={hanauma:['Book Hanauma Bay','https://pros6.hnl.info/hanaumabay'],dh:['Book Diamond Head','https://gostateparks.hawaii.gov/diamondhead'],wai:['Book Waiʻānapanapa','https://gostateparks.hawaii.gov/waianapanapa'],pcc:['Polynesian Cultural Center','https://www.polynesia.com'],kual:['Kualoa Ranch','https://www.kualoa.com'],olu:['Book Old Lahaina Luau','https://www.oldlahainaluau.com'],hale:['Haleakalā park info','https://www.nps.gov/hale']};
 const H1=[[21.318,-157.900],[21.308,-157.872],[21.299,-157.850],[21.289,-157.838]];
 const PALI=[[21.300,-157.848],[21.330,-157.832],[21.367,-157.793],[21.385,-157.757],[21.396,-157.740],[21.397,-157.727]];
@@ -18,59 +19,60 @@ const KAL=[[21.276,-157.812],[21.281,-157.795],[21.280,-157.770],[21.284,-157.74
 const W30=[[20.905,-156.690],[20.870,-156.675],[20.835,-156.650],[20.810,-156.625],[20.795,-156.590],[20.786,-156.560],[20.795,-156.520]];
 const MAA_KAH=[[20.830,-156.505],[20.860,-156.492],[20.884,-156.470]];
 const HANA_HWY=[[20.912,-156.340],[20.919,-156.300],[20.915,-156.270]];
+const K311=[[20.745,-156.450],[20.790,-156.460],[20.830,-156.465],[20.870,-156.468]];
+const KIH_MAA=[[20.745,-156.455],[20.770,-156.478],[20.785,-156.500]];
 const CRATER=[[20.837,-156.337],[20.818,-156.322],[20.795,-156.312],[20.780,-156.290],[20.765,-156.276],[20.750,-156.262],[20.737,-156.248],[20.724,-156.240],[20.714,-156.246]];
 const DAYS=[
-{d:'Mon',dt:'Nov 23',t:'Aloha, Oʻahu',img:'plane',x:'Nupur lands mid-afternoon and Evita arrives at night. Keep today easy: settle in, eat, sleep.',li:['<b>Nupur:</b> RDU 7:10 AM → JFK (1 h layover) → HNL 4:06 PM.','<b>Evita:</b> PSC 1:47 PM → SFO (44 min layover) → HNL 8:30 PM.','<b>12:00 PM ET / 7:00 AM HST:</b> Evita books Hanauma Bay for Wednesday, right on the dot.'],bk:['hanauma'],s:[
+{d:'Mon',dt:'Nov 23',t:'Aloha, Oʻahu',img:'plane',x:'Nupur lands mid-afternoon and Evita arrives at night. Keep today easy: settle in, eat, sleep.',li:['<b>Nupur (Delta):</b> RDU 7:10 AM → JFK (1 h layover) → HNL 4:06 PM.','<b>Evita (United):</b> PSC 1:47 PM → SFO (44 min layover) → HNL 8:30 PM.','<b>12:00 PM ET / 7:00 AM HST:</b> book Hanauma Bay for Wednesday. Reservations open 48 hours ahead, right on the dot.'],bk:['hanauma'],s:[
  {t:'4:06 PM',n:'Land at HNL',p:LOC.hnl,img:'plane',x:'Nupur lands from JFK. Grab bags and pick up the car.'},
- {t:'4:45 PM',n:'Check into the Waikiki Airbnb',p:LOC.bnb,img:'home',via:H1,x:'Check-in opens at 4 PM. Drop bags, change into something light.'},
+ {t:'5:05 PM',n:'Check into the Waikiki Airbnb',p:LOC.bnb,img:'home',via:H1,x:'Check-in opens at 4 PM. Drop bags, change into something light.'},
  {t:'6:30 PM',n:'Easy dinner in Waikiki',p:LOC.surf,img:'food',x:'Walk to dinner nearby. Pick up water, snacks and reef-safe sunscreen on the way back.'},
  {t:'8:30 PM',n:'Pick up Evita at HNL',p:LOC.hnl,img:'plane',via:rev(H1),x:'Evita lands from SFO at 8:30 PM. About 20 minutes each way.'}]},
-{d:'Tue',dt:'Nov 24',t:'Windward side to the North Shore',img:'atv',x:'One big loop, south to north so you never backtrack: beach, garden, ranch, luau.',bk:['kual','pcc'],s:[
- {t:'9:00 AM',n:'Leave Waikiki',p:LOC.bnb,img:'drive',x:'Over the Pali Highway to Kailua, about 35 minutes.'},
- {t:'9:45 AM',n:'Lanikai Beach',p:LOC.lani,img:'beach',via:PALI,x:'Swim and relax on soft white sand facing the Mokulua islets.',tip:'Street parking is very limited: park at Kailua Beach Park and walk over.'},
- {t:'11:45 AM',n:'Lunch in Kailua town',p:LOC.kai,img:'food',via:[[21.397,-157.727]],x:'Plenty of casual spots for poke, plate lunch and shave ice.'},
- {t:'1:00 PM',n:'Hoʻomaluhia Botanical Garden',p:LOC.hoom,img:'garden',via:[[21.395,-157.762],[21.400,-157.790],[21.392,-157.805]],x:'Free. Drive the loop road under the green Koʻolau cliffs and stop at the lake.',tip:'Keep it short: Kualoa check-in is at 2:15, about 20 minutes away.'},
- {t:'2:15 PM',n:'Kualoa Ranch UTV',p:LOC.kual,img:'atv',via:[[21.410,-157.800],[21.432,-157.818],[21.462,-157.840],[21.492,-157.845]],bk:'kual',x:'Check in at 2:15 for the Jurassic Valley adventure. It is done around 5 PM.'},
- {t:'5:30 PM',n:'Aliʻi Luau at PCC',p:LOC.pcc,img:'luau',via:[[21.548,-157.857],[21.575,-157.876],[21.605,-157.895],[21.626,-157.912]],bk:'pcc',x:'Luau dinner at the Polynesian Cultural Center, about 25 minutes up the coast from Kualoa.',tip:'You will likely walk in around 5:30. If your package has a set start time, call ahead to let them know.'},
- {t:'9:00 PM',n:'Drive back to Waikiki',p:LOC.bnb,img:'home',via:[[21.600,-157.890],[21.520,-157.840],[21.450,-157.836],[21.408,-157.812],[21.396,-157.858],[21.378,-157.902],[21.368,-157.926],[21.338,-157.895],[21.310,-157.866],[21.290,-157.840]],x:'Home through the H-3 tunnels, about an hour.'}]},
-{d:'Wed',dt:'Nov 25',t:'Hanauma Bay and Diamond Head',img:'snorkel',x:'Snorkel while the water is calm, hike Diamond Head after lunch, then the beach.',bk:['hanauma','dh'],s:[
- {t:'8:00 AM',n:'Leave Waikiki',p:LOC.bnb,img:'drive',x:'About 25 minutes along the south shore.'},
- {t:'8:30 AM',n:'Hanauma Bay snorkel',p:LOC.hana,img:'snorkel',via:KAL,bk:'hanauma',x:'Snorkel until about 11. $25 per person, a little cash for parking, and a short required video before you walk down.'},
- {t:'11:00 AM',n:'Lunch in Kaimukī',p:LOC.kaim,img:'food',via:rev(KAL).slice(1),x:'Kaimukī has great casual lunch spots on the way to Diamond Head.'},
- {t:'12:30 PM',n:'Diamond Head summit',p:LOC.dh,img:'hike',via:[[21.270,-157.803]],bk:'dh',x:'About 1.5 hours round trip to the crater rim and back.',tip:'Book a 12:30 entry slot with parking. There is little shade at midday: bring water and a hat.'},
- {t:'2:30 PM',n:'Surf lesson or beach time',p:LOC.surf,img:'surf',via:[[21.265,-157.812],[21.272,-157.818]],x:'Waikiki has gentle, rolling waves that are perfect for a first lesson. Book with a beach surf school a day or two ahead.'},
- {t:'5:50 PM',n:'Sunset and dinner',p:LOC.sset,img:'sunset',x:'Watch the sun go down from the beach, then dinner in Waikiki.'}]},
-{d:'Thu',dt:'Nov 26',t:'Thanksgiving: shop, fly to Maui',img:'shop',x:'Check out by 11, shop through the afternoon, then the 6:27 PM flight to Maui.',li:['Maui Airbnb check-in opens at 3 PM, so it is ready when you land.','Beaches near the Maui Airbnb for free time later: Kāʻanapali, Nāpili and Kapalua Bay.'],s:[
- {t:'9:30 AM',n:'Pack and check out by 11',p:LOC.bnb,img:'home',x:'Load the bags in the car and keep them out of sight all day.'},
+{d:'Tue',dt:'Nov 24',t:'Gardens and Kualoa Ranch',img:'atv',x:'Over the mountains to the windward side: a garden under the cliffs, lunch in Kāneʻohe, then the Kualoa UTV tour. Back in Waikiki for sunset.',bk:['kual'],s:[
+ {t:'8:20 AM',n:'Leave Waikiki',p:LOC.bnb,img:'drive',x:'Over the Pali Highway, about 25 minutes.'},
+ {t:'9:00 AM',n:'Hoʻomaluhia Botanical Garden',p:LOC.hoom,img:'garden',via:[...PALI.slice(0,3),[21.380,-157.800]],x:'Free admission. Drive the loop road under the green Koʻolau cliffs and stop at the lake.'},
+ {t:'11:30 AM',n:'Lunch in Kāneʻohe',p:LOC.kane,img:'food',via:[[21.400,-157.803]],x:'Casual plate lunch, poke and shave ice spots around town.'},
+ {t:'2:15 PM',n:'Kualoa Ranch UTV',p:LOC.kual,img:'atv',via:[[21.432,-157.818],[21.462,-157.840],[21.492,-157.845]],bk:'kual',x:'Check in at 2:15 for the UTV tour. It is done around 5 PM.',tip:'Head over from lunch by about 1:30.'},
+ {t:'5:00 PM',n:'Drive back to Waikiki',p:LOC.bnb,img:'home',via:[[21.492,-157.845],[21.462,-157.840],[21.432,-157.818],[21.408,-157.812],[21.396,-157.858],[21.378,-157.902],[21.368,-157.926],[21.338,-157.895],[21.310,-157.866],[21.290,-157.840]],x:'Home through the H-3 tunnels, about 50 minutes.'},
+ {t:'6:20 PM',n:'Sunset and dinner in Waikiki',p:LOC.sset,img:'sunset',x:'Sunset is around 5:50, so you will catch the last of the light as you get in. Then dinner nearby.',tip:'No daylight left for a surf lesson today.'}]},
+{d:'Wed',dt:'Nov 25',t:'Diamond Head, Hanauma Bay, Lanikai',img:'snorkel',x:'An early hike, a morning snorkel, and an afternoon on the windward beaches.',bk:['dh','hanauma'],s:[
+ {t:'7:00 AM',n:'Leave Waikiki',p:LOC.bnb,img:'drive',x:'About 10 minutes to the Diamond Head trailhead.'},
+ {t:'7:30 AM',n:'Diamond Head summit',p:LOC.dh,img:'hike',via:[[21.272,-157.818],[21.265,-157.812]],bk:'dh',x:'About 1.5 hours round trip to the crater rim and back. The morning is cooler.',tip:'Needs a reservation: book the 7:30 slot with parking.'},
+ {t:'9:15 AM',n:'Breakfast in Hawaiʻi Kai',p:LOC.hkai,img:'food',via:[[21.270,-157.803],[21.276,-157.780],[21.280,-157.740]],x:'Cafés at Koko Marina, ten minutes from Hanauma Bay.',tip:'Only about half an hour before your Hanauma slot: keep it quick.'},
+ {t:'10:00 AM',n:'Hanauma Bay snorkel',p:LOC.hana,img:'snorkel',via:[[21.279,-157.712],[21.272,-157.700]],bk:'hanauma',x:'Snorkel until about 1. $25 per person, a little cash for parking, and a short required video before you walk down.',tip:'Needs a reservation: it opens 48 hours ahead, 12 PM ET on Monday.'},
+ {t:'1:00 PM',n:'Hālona Blowhole (optional)',p:LOC.halona,img:'coast',x:'A two-minute stop at the lookout: seawater shoots up through a lava tube when the waves roll in.'},
+ {t:'1:45 PM',n:'Lunch in Kailua town',p:LOC.kai,img:'food',via:[[21.300,-157.665],[21.335,-157.695],[21.360,-157.710],[21.385,-157.725]],x:'Plenty of casual spots for poke, plate lunch and shave ice.'},
+ {t:'2:45 PM',n:'Kailua or Lanikai Beach',p:LOC.lani,img:'beach',via:[[21.392,-157.722]],x:'Swim and relax on soft white sand facing the Mokulua islets.',tip:'Parking near Lanikai is very limited: park at Kailua Beach Park and walk over.'},
+ {t:'5:00 PM',n:'Drive back to Waikiki',p:LOC.bnb,img:'home',via:rev(PALI),x:'Over the Pali Highway, about 30 minutes. Dinner in Waikiki tonight.'}]},
+{d:'Thu',dt:'Nov 26',t:'Thanksgiving: Waikiki, downtown, fly to Maui',img:'shop',x:'Check out by 11, an easy day around Honolulu, then the 6:27 PM flight to Maui.',li:['Closed today for Thanksgiving: Pearl Harbor, Ala Moana Center and the Polynesian Cultural Center.','<b>Flight (Alaska):</b> HNL 6:27 PM → OGG 7:08 PM.','Maui Airbnb check-in opens at 3 PM, so it is ready when you land.'],s:[
+ {t:'10:00 AM',n:'Pack and check out by 11',p:LOC.bnb,img:'home',x:'Load the bags in the car and keep them out of sight all day.'},
  {t:'11:00 AM',n:'Royal Hawaiian Center and International Market Place',p:LOC.shops,img:'shop',x:'Both are a short walk apart in Waikiki.',tip:'Check Thanksgiving hours first: many stores change them.'},
- {t:'1:00 PM',n:'Lunch and shopping at Ala Moana',p:LOC.ala,img:'shop',via:[[21.284,-157.836]],x:'The big open-air mall, on the way toward the airport.'},
- {t:'3:00 PM',n:'Pearl Harbor (optional)',p:LOC.pearl,img:'memorial',via:[[21.300,-157.862],[21.310,-157.882],[21.330,-157.920],[21.355,-157.940]],x:'Only if there is time and energy left. It is about ten minutes from the airport.',tip:'The memorial usually closes on Thanksgiving Day. Check before you drive over.'},
- {t:'4:30 PM',n:'Drop the car at HNL',p:LOC.hnl,img:'plane',via:[[21.350,-157.935],[21.330,-157.925]],x:'Your flight to Maui leaves at 6:27 PM.'},
+ {t:'1:30 PM',n:'Downtown Honolulu',p:LOC.dtwn,img:'town',via:[[21.290,-157.840],[21.300,-157.852]],x:'Walk past ʻIolani Palace, the State Capitol and the King Kamehameha statue, then Chinatown next door.'},
+ {t:'4:30 PM',n:'Drop the car at HNL',p:LOC.hnl,img:'plane',via:[[21.312,-157.870],[21.320,-157.900]],x:'Your flight to Maui leaves at 6:27 PM.'},
  {t:'7:08 PM',n:'Land in Kahului (OGG)',p:LOC.ogg,img:'plane',m:'fly',x:'Pick up the car.'},
- {t:'8:00 PM',n:'Drive to the west Maui Airbnb',p:LOC.kaa,img:'home',via:[[20.886,-156.465],...rev(MAA_KAH).slice(1),...rev(W30)],x:'About 45 to 60 minutes.'},
- {t:'8:45 PM',n:'Thanksgiving dinner',p:LOC.tday,img:'food',x:'Reserve a table this week: it is late on a holiday and many places will be closed or full.'}]},
-{d:'Fri',dt:'Nov 27',t:'Road to Hāna, then the luau',img:'waterfall',x:'Waterfalls, sea cliffs and a black sand beach, then back west for the luau. Turn around after Waiʻānapanapa to make it on time.',bk:['wai','olu'],s:[
- {t:'8:00 AM',n:'Leave west Maui',p:LOC.kaa,img:'drive',x:'About an hour to Pāʻia.'},
- {t:'9:00 AM',n:'Breakfast in Pāʻia',p:LOC.paia,img:'town',via:[...W30,...MAA_KAH,[20.893,-156.440],[20.905,-156.410]],x:'Breakfast and a wander around town.',tip:'Fill the gas tank here: there is almost none further on.'},
- {t:'10:00 AM',n:'Twin Falls',p:LOC.twin,img:'waterfall',via:HANA_HWY,x:'Short walk to the falls. Small parking fee.'},
- {t:'11:30 AM',n:'Keʻanae Peninsula',p:LOC.kean,img:'coast',via:[[20.903,-156.220],[20.890,-156.200],[20.885,-156.176],[20.870,-156.163]],x:'Black lava rock and huge waves crashing next to bright green taro fields.'},
- {t:'12:30 PM',n:'Lunch at the Nāhiku stands',p:LOC.nahi,img:'food',via:[[20.850,-156.130]],x:'Roadside stands with banana bread, smoked fish and fresh fruit. Bring cash.'},
- {t:'1:30 PM',n:'Waiʻānapanapa State Park',p:LOC.wai,img:'blacksand',via:[[20.818,-156.090],[20.800,-156.060],[20.792,-156.025]],bk:'wai',x:'Black sand beach, sea caves and a coastal trail.',tip:'Head back by about 2:30 to make the luau. Go back the way you came: rental and most Turo agreements forbid the back road past Kīpahulu.'},
- {t:'5:15 PM',n:'Old Lahaina Luau',p:LOC.olu,img:'luau',via:[[20.792,-156.025],[20.800,-156.060],[20.818,-156.090],[20.845,-156.130],[20.870,-156.163],[20.885,-156.176],[20.890,-156.200],[20.903,-156.220],...rev(HANA_HWY),[20.905,-156.410],[20.893,-156.440],...rev(MAA_KAH),...rev(W30).slice(0,5)],bk:'olu',x:'Check in at 5:15 (1251 Front St). Lei greeting, a 4-course dinner, and hula as the sun sets. It ends around 8:15, ten minutes from the Airbnb.'}]},
-{d:'Sat',dt:'Nov 28',t:'Molokini and Haleakalā sunset',img:'volcano',x:'Snorkel in the morning, then up the volcano for sunset above the clouds. Sunset needs no reservation.',bk:['hale'],s:[
- {t:'5:50 AM',n:'Leave for Māʻalaea Harbor',p:LOC.kaa,img:'drive',x:'About 35 to 40 minutes. Check in between 6:30 and 7.'},
- {t:'6:30 AM',n:'Check in at the harbor',p:LOC.maa,img:'boat',via:W30,x:'Confirm which harbor your tour leaves from.'},
- {t:'7:30 AM',n:'Molokini Crater',p:LOC.molo,img:'snorkel',m:'boat',x:'Snorkel inside a sunken volcanic crater with very clear water.'},
- {t:'9:30 AM',n:'Turtle Town',p:LOC.ttown,img:'turtle',m:'boat',x:'Green sea turtles feed along the reef here. Look, but keep your distance.'},
- {t:'12:00 PM',n:'Back at the harbor',p:LOC.maa,img:'boat',m:'boat',x:'Rinse off and head inland.'},
- {t:'12:30 PM',n:'Lunch in Kahului',p:LOC.kah,img:'food',via:MAA_KAH,x:'Eat well and pick up snacks and water for the summit.'},
- {t:'3:00 PM',n:'Haleakalā summit and sunset',p:LOC.sum,img:'volcano',via:[[20.870,-156.420],[20.850,-156.370],...CRATER],bk:'hale',x:'About 1.5 hours up; pay the car entrance fee at the gate. Explore the crater viewpoints, then watch sunset above the clouds around 5:45.',tip:'It is near freezing at 10,000 ft. Wear the warmest layers you brought.'},
- {t:'6:00 PM',n:'Drive back to the Airbnb',p:LOC.kaa,img:'home',via:[...rev(CRATER),[20.850,-156.370],[20.870,-156.420],...rev(MAA_KAH),...rev(W30)],x:'Drive down slowly in the dark. Grab dinner in Kahului on the way.'}]},
-{d:'Sun',dt:'Nov 29',t:'Pāʻia, then fly home',img:'town',x:'A slow last day. Check out at 10 and spend the afternoon in Pāʻia. Kāʻanapali, Nāpili and Kapalua Bay are next to the Airbnb if you want one more beach first.',s:[
- {t:'10:00 AM',n:'Check out',p:LOC.kaa,img:'home',x:'Keep luggage out of sight in the car all day.'},
- {t:'11:00 AM',n:'Pāʻia town',p:LOC.paia,img:'town',via:[...W30,...MAA_KAH,[20.893,-156.440],[20.905,-156.410]],x:'Surf shops, boutiques and good coffee. Hoʻokipa Lookout, five minutes east, often has turtles on the beach in the afternoon.'},
- {t:'6:30 PM',n:'Dinner in Kahului, return the car',p:LOC.kah,img:'food',via:[[20.905,-156.410],[20.893,-156.440]],x:'Last dinner on the island, then drop the car at the airport.'},
- {t:'8:00 PM',n:'Fly home from OGG',p:LOC.ogg,img:'plane',x:'<b>Evita:</b> 10:10 PM to Seattle, landing Mon 6:02 AM. <b>Nupur:</b> 11:30 PM to Phoenix (1 h 17 min layover), landing in Charlotte Mon 3:37 PM, then the 7:45 PM train to Raleigh, arriving 10:52 PM. Mahalo, Hawaiʻi!'}]}];
+ {t:'7:45 PM',n:'Drive to the Kīhei Airbnb',p:LOC.kih,img:'home',via:rev(K311),x:'About 25 minutes down to the south shore.'},
+ {t:'8:40 PM',n:'Thanksgiving dinner in Kīhei',p:LOC.kdin,img:'food',x:'Reserve a table this week: it is late on a holiday and many places will be closed or full.'}]},
+{d:'Fri',dt:'Nov 27',t:'Road to Hāna',img:'waterfall',x:'Brunch in Pāʻia, sea cliffs at Keʻanae and the black sand beach at Waiʻānapanapa, then a slow drive back with scenic stops.',bk:['wai'],s:[
+ {t:'8:00 AM',n:'Leave Kīhei',p:LOC.kih,img:'drive',x:'About 40 minutes to Pāʻia.'},
+ {t:'9:00 AM',n:'Brunch in Pāʻia',p:LOC.paia,img:'town',via:[...K311,[20.893,-156.440],[20.905,-156.410]],x:'Brunch, surf shops and a wander around town.',tip:'Fill the gas tank here: there is almost none further on.'},
+ {t:'11:30 AM',n:'Keʻanae Peninsula',p:LOC.kean,img:'coast',via:[...HANA_HWY,[20.903,-156.220],[20.890,-156.200],[20.885,-156.176],[20.870,-156.163]],x:'Black lava rock and huge waves crashing next to bright green taro fields.'},
+ {t:'1:30 PM',n:'Waiʻānapanapa State Park',p:LOC.wai,img:'blacksand',via:[[20.845,-156.130],[20.818,-156.090],[20.800,-156.060],[20.792,-156.025]],bk:'wai',x:'Black sand beach, sea caves and a coastal trail. Roadside stands on the way sell banana bread and fruit.',tip:'Needs a reservation. Go back the way you came: rental and most Turo agreements forbid the back road past Kīpahulu.'},
+ {t:'3:00 PM',n:'Drive back to Kīhei',p:LOC.kih,img:'home',via:[[20.792,-156.025],[20.800,-156.060],[20.818,-156.090],[20.845,-156.130],[20.870,-156.163],[20.885,-156.176],[20.890,-156.200],[20.903,-156.220],...rev(HANA_HWY),[20.905,-156.410],[20.893,-156.440],...rev(K311)],x:'About three hours with scenic stops as time allows, back around 6 to 7 PM.'}]},
+{d:'Sat',dt:'Nov 28',t:'Molokini, beach, luau',img:'boat',x:'Snorkel in the morning, a beach afternoon, then the luau at sunset in Lahaina.',bk:['olu'],s:[
+ {t:'6:00 AM',n:'Leave for Māʻalaea Harbor',p:LOC.kih,img:'drive',x:'About 15 to 20 minutes up the coast.'},
+ {t:'6:30 AM',n:'Check in at the harbor',p:LOC.maa,img:'boat',via:KIH_MAA,x:'Confirm which harbor your tour leaves from.',tip:'Needs a reservation for the 7 AM tour.'},
+ {t:'7:00 AM',n:'Molokini Crater',p:LOC.molo,img:'snorkel',m:'boat',x:'Snorkel inside a sunken volcanic crater with very clear water.'},
+ {t:'8:30 AM',n:'Turtle Town',p:LOC.ttown,img:'turtle',m:'boat',x:'Green sea turtles feed along the reef here. Look, but keep your distance.'},
+ {t:'10:00 AM',n:'Back at the harbor',p:LOC.maa,img:'boat',m:'boat',x:'Rinse off. Lahaina is about 30 minutes west.'},
+ {t:'12:00 PM',n:'Lunch in Lahaina',p:LOC.lah,img:'food',via:rev(W30).slice(0,5),x:'Lahaina is still rebuilding after the 2023 fire. Eating here supports local businesses.'},
+ {t:'1:30 PM',n:'Kāʻanapali, Nāpili or Wailea beach',p:LOC.kbeach,img:'beach',via:[[20.895,-156.684]],x:'Kāʻanapali and Nāpili are 10 to 20 minutes from the luau. Wailea is the beach next to the Airbnb, if you would rather rest there first.'},
+ {t:'5:15 PM',n:'Old Lahaina Luau',p:LOC.olu,img:'luau',via:[[20.905,-156.690]],bk:'olu',x:'5:15 to 8:15 PM (1251 Front St). Lei greeting, a 4-course dinner, and hula as the sun sets.',tip:'Needs a reservation.'},
+ {t:'8:15 PM',n:'Drive back to Kīhei',p:LOC.kih,img:'home',via:[[20.870,-156.674],...W30.slice(3),...rev(KIH_MAA)],x:'About 45 minutes along the coast.'}]},
+{d:'Sun',dt:'Nov 29',t:'Haleakalā sunset, fly home',img:'volcano',x:'Check out at 10 and keep the day loose: Kīhei and Wailea beaches are right by the Airbnb. Optional: sunset above the clouds at Haleakalā, on the way to the airport.',bk:['hale'],s:[
+ {t:'10:00 AM',n:'Check out',p:LOC.kih,img:'home',x:'Keep luggage out of sight in the car all day.'},
+ {t:'3:30 PM',n:'Haleakalā sunset (optional)',p:LOC.sum,img:'volcano',via:[[20.745,-156.450],[20.775,-156.440],[20.805,-156.400],[20.830,-156.360],...CRATER],bk:'hale',x:'Sunset is about 5:15 to 5:45. Pay the car entrance fee at the gate and explore the crater viewpoints first.',tip:'It is near freezing at 10,000 ft: wear your warmest layers. Prefer sunrise instead? That needs a reservation and a start around 3 AM.'},
+ {t:'7:30 PM',n:'Dinner in Kahului, return the car',p:LOC.kah,img:'food',via:[...rev(CRATER),[20.850,-156.370],[20.870,-156.420]],x:'Drive down slowly in the dark, about 1.5 hours. Last dinner, then drop the car at the airport.'},
+ {t:'8:30 PM',n:'Fly home from OGG',p:LOC.ogg,img:'plane',x:'<b>Evita (United):</b> 10:10 PM to Seattle, landing Mon 6:02 AM. <b>Nupur (American):</b> 11:30 PM to Phoenix (1 h 17 min layover), landing in Charlotte Mon 3:37 PM, then the 7:45 PM Amtrak to Raleigh, arriving 10:52 PM. Mahalo, Hawaiʻi!'}]}];
 
 
 /* Google Places search text for each stop's photo (stops not listed use the day's photo) */
@@ -82,14 +84,14 @@ const Q={
  'Hanauma Bay snorkel':'Hanauma Bay Nature Preserve','Lunch in Kaimukī':'Kaimuki Honolulu','Rest at the Airbnb':'Waikiki Honolulu',
  'Surf lesson or beach time':'Kuhio Beach Park Waikiki','Sunset and dinner':'Waikiki Beach sunset','Diamond Head summit':'Diamond Head State Monument',
  'Pack and check out by 11':'Waikiki Honolulu','Royal Hawaiian Center and International Market Place':'International Market Place Honolulu',
- 'Lunch and shopping at Ala Moana':'Ala Moana Center','Pearl Harbor (optional)':'Pearl Harbor National Memorial','Lunch at the Nāhiku stands':'Nahiku Marketplace','Lunch in Kahului':'Kahului Maui','Pāʻia town':'Paia Maui','Drive back to the Airbnb':'Kaanapali Beach','Land in Kahului (OGG)':'Kahului Airport','Drive to the west Maui Airbnb':'Kaanapali Beach',
- 'Thanksgiving dinner':'Kaanapali Beach Resort','Leave west Maui':'Kaanapali Beach','Breakfast in Pāʻia':'Paia Maui','Twin Falls':'Twin Falls Maui Haiku',
+ 'Lunch and shopping at Ala Moana':'Ala Moana Center','Lunch in Kāneʻohe':'Kaneohe Oahu','Sunset and dinner in Waikiki':'Waikiki Beach sunset','Breakfast in Hawaiʻi Kai':'Koko Marina Center','Hālona Blowhole (optional)':'Halona Blowhole Lookout','Kailua or Lanikai Beach':'Lanikai Beach Kailua','Downtown Honolulu':'Iolani Palace','Brunch in Pāʻia':'Paia Maui','Kāʻanapali or Nāpili beach':'Kaanapali Beach','Haleakalā sunset (optional)':'Haleakala Visitor Center','Pearl Harbor (optional)':'Pearl Harbor National Memorial','Lunch at the Nāhiku stands':'Nahiku Marketplace','Lunch in Kahului':'Kahului Maui','Pāʻia town':'Paia Maui','Drive back to the Airbnb':'Kaanapali Beach','Land in Kahului (OGG)':'Kahului Airport','Drive to the west Maui Airbnb':'Kaanapali Beach',
+ 'Thanksgiving dinner in Kīhei':'Kihei Maui','Kāʻanapali, Nāpili or Wailea beach':'Kaanapali Beach','Leave west Maui':'Kaanapali Beach','Breakfast in Pāʻia':'Paia Maui','Twin Falls':'Twin Falls Maui Haiku',
  'Keʻanae Peninsula':'Keanae Peninsula Maui','Waiʻānapanapa State Park':'Waianapanapa State Park','Hāna town, then turn back':'Hana Bay Beach Park',
  'Back on the west side':'Kaanapali Beach','Leave for Māʻalaea Harbor':'Kaanapali Beach','Check in at the harbor':'Maalaea Harbor','Molokini Crater':'Molokini Crater',
  'Turtle Town':'Turtle Town Maui Makena','Back at the harbor':'Maalaea Harbor','Lunch in Lahaina':'Lahaina Maui','Nāpili or Kapalua Bay':'Kapalua Bay Beach',
  'Old Lahaina Luau':'Old Lahaina Luau','Check out':'Kaanapali Beach','Pāʻia brunch and shops':'Paia Maui','Hoʻokipa Lookout':'Hookipa Beach Park',
  'Snacks in Makawao':'Makawao Maui','Haleakalā summit and sunset':'Haleakala Visitor Center','Dinner in Kahului, return the car':'Kahului Maui','Fly home from OGG':'Kahului Airport'};
-const DAYQ=['Waikiki Beach Honolulu','Kualoa Ranch','Hanauma Bay Nature Preserve','International Market Place Honolulu','Road to Hana Maui','Molokini Crater','Paia Maui'];
+const DAYQ=['Waikiki Beach Honolulu','Kualoa Ranch','Hanauma Bay Nature Preserve','International Market Place Honolulu','Road to Hana Maui','Molokini Crater','Haleakala National Park summit'];
 
 /* ---------- build legs and slides ---------- */
 DAYS.forEach(D=>{D.legs=[null];D.s.forEach((s,i)=>{if(!i)return;let pts;
