@@ -2,7 +2,7 @@
    1) Your Google Maps Platform API key goes below.
    2) In Google Cloud, enable: Maps JavaScript API, Places API (New), Routes API.
    Without a key the map falls back to OpenStreetMap / Esri tiles and sketched routes, with no photos. */
-const GOOGLE_API_KEY = "AIzaSyCO2AAWn1XKeiKWj6ot0J_uYSz5t1ZT3P0";
+const GOOGLE_API_KEY = "AIzaSyCpD4IWof-Kj4VNeoBZsUKYiNoU7HX5Vo4";
 const rev=a=>a.slice().reverse();
 
 const LOC={
